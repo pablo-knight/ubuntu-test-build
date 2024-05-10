@@ -30,8 +30,11 @@ jobs:
           cd ..
       - name: Build server packages
         run: |
+          pwd
           mv debian_server privacyidea/debian
-          sed -i 's/{{CODENAME}}/jammy/g' debian/changelog
+          ls -la
+          sed -i 's/{{CODENAME}}/jammy/g' privacyidea/debian/changelog
+          cd privacyidea
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
@@ -40,7 +43,8 @@ jobs:
           pwd
           mv debian_radius privacyidea/debian
           ls -la
-          sed -i 's/{{CODENAME}}/jammy/g' debian/changelog
+          sed -i 's/{{CODENAME}}/jammy/g' privacyidea/debian/changelog
+          cd privacyidea
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
