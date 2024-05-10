@@ -91,7 +91,6 @@ jobs:
           REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         run: |
-          sshpass -p $REMOTE_PASSWORD scp /path/to/your/file.deb $REMOTE_USERNAME@hostname:/target/path/
             if: github.event_name == 'release'
               for deb_file in $(ls ../*.deb); do
               sshpass -p $REMOTE_PASSWORD scp deb_file $REMOTE_USERNAME@$REMOTE_HOST:/home/action/ -p 39122
