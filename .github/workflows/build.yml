@@ -27,7 +27,6 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b --source-option=-Sa
           rm -r debian
-          cd ..
       - name: Build server packages
         run: |
           mv debian_server privacyidea/debian
