@@ -31,7 +31,7 @@ jobs:
       - name: Build server packages
         run: |
           mv debian_server privacyidea/debian
-          cp -r deploy privacyidea/deploy
+          cp -r deploy/* privacyidea/deploy
           sed -i 's/{{CODENAME}}/jammy/g' privacyidea/debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
