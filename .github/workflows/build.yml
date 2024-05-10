@@ -4,6 +4,7 @@ on:
   release:
     types: [released]
 
+jobs:
   build-jammy:
     name: Ubuntu 22.04 LTS build
     runs-on: ubuntu-22.04
@@ -84,3 +85,4 @@ on:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
+
