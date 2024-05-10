@@ -21,7 +21,7 @@ jobs:
         env:
           DH_VIRTUALENV_INSTALL_ROOT: /opt
         run: |
-          mv debian_privacyidea debian
+          mv debian_privacyidea privacyidea/debian
           sed -i 's/{{CODENAME}}/jammy/g' debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
@@ -60,7 +60,7 @@ jobs:
         env:
           DH_VIRTUALENV_INSTALL_ROOT: /opt
         run: |
-          mv debian_privacyidea debian
+          mv debian_privacyidea privacyidea/debian
           sed -i 's/{{CODENAME}}/focal/g' debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
