@@ -22,7 +22,6 @@ jobs:
           mv debian_privacyidea debian
           sed -i 's/{{CODENAME}}/jammy/g' debian/changelog
           sudo mk-build-deps -ri
-          ls -la
           dpkg-buildpackage -us -uc -b --source-option=-Sa
           rm -r debian
       - name: Build server packages
