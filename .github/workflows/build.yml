@@ -92,8 +92,6 @@ jobs:
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         run: |
           ls *.deb
-          pwd
-          ls
-          for deb_file in $(ls *.deb); do
+          for deb_file in *.deb; do
             sshpass -p "$REMOTE_PASSWORD" scp $deb_file "$REMOTE_USERNAME@$REMOTE_HOST":/home/action/packages/ -p 39122
           done
