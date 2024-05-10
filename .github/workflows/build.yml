@@ -93,5 +93,5 @@ jobs:
         run: |
           ls *.deb
           for deb_file in *.deb; do
-            sshpass -p "$REMOTE_PASSWORD" scp -P 39122 $deb_file action@135.181.42.3:/home/action/packages/
+            sshpass -p "$REMOTE_PASSWORD" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 39122 $deb_file action@135.181.42.3:/home/action/packages/
           done
