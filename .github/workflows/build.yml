@@ -58,7 +58,7 @@ jobs:
           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
           sudo apt update
           sudo apt install -y build-essential debhelper devscripts equivs dh-virtualenv
-      - name: Build core package
+      - name: Build privacyID3A package
         env:
           DH_VIRTUALENV_INSTALL_ROOT: /opt
         run: |
@@ -85,13 +85,13 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-      - name: Transfer files
-        env:
-          REMOTE_USERNAME: ${{ secrets.REMOTE_USERNAME }}
-          REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
-          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
+      - name: Setup SSH and transfer
         run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H ${{ secrets.HOST }} >> ~/.ssh/known_hosts
           ls *.deb
           for deb_file in *.deb; do
-            sshpass -p "$REMOTE_PASSWORD" scp -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -P 39122 $deb_file action@135.181.42.3:/home/action/packages/
+           scp $deb_file -p 39122 -o StrictHostKeyChecking=no -o ${{ secrets.USERNAME }}@${{ secrets.HOST }}:/home/action/packages/
           done
