@@ -85,13 +85,15 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-      
       - name: Transfer files
         env:
           REMOTE_USERNAME: ${{ secrets.REMOTE_USERNAME }}
           REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
           REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         run: |
+          ls -la
+          pwd
+          ls -la ..
           for deb_file in $(ls ../*.deb); do
             sshpass -p "$REMOTE_PASSWORD" scp "@$deb_file" "$REMOTE_USERNAME@$REMOTE_HOST":/home/action/ -p 39122
           done
