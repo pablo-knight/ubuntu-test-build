@@ -12,7 +12,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodule: 'recursive'
+          submodules: 'recursive'
       - name: Install dependencies
         run: |
           sudo apt update
@@ -49,7 +49,7 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          submodule: 'recursive'
+          submodules: 'recursive'
       - name: Install dependencies
         run: |
           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
