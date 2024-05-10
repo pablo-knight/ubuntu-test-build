@@ -40,7 +40,6 @@ jobs:
       - name: Build radius packages
         run: |
           mv debian_radius privacyidea/debian
-          cp -r deploy privacyidea/deploy
           sed -i 's/{{CODENAME}}/jammy/g' privacyidea/debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
