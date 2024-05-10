@@ -31,8 +31,7 @@ jobs:
       - name: Build server packages
         run: |
           mv debian_server privacyidea/debian
-          cp deploy/privacyidea/pi.cfg privacyidea/deploy/privacyidea/
-          cp deploy/privacyidea/openssl.cnf privacyidea/deploy/privacyidea/
+          cp deploy/privacyidea/* privacyidea/deploy/privacyidea/
           cp deploy/apache/sites-available/* privacyidea/deploy/apache/sites-available/
           sed -i 's/{{CODENAME}}/jammy/g' privacyidea/debian/changelog
           cd privacyidea
