@@ -18,6 +18,7 @@ jobs:
       - name: Build core package
         env:
           DH_VIRTUALENV_INSTALL_ROOT: /opt
+        run: ls -la
         run: |
           mv debian_privacyidea debian
           sed -i 's/{{CODENAME}}/jammy/g' debian/changelog
