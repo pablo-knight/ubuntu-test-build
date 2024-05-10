@@ -91,12 +91,11 @@ jobs:
           REPO_SSH: ${{ secrets.SSH_PUB }}
         # Only upload if it is a release
         run: |
-        mkdir -p ~/.ssh
-        echo "${{ secrets.SSH_PUB }}" > ~/.ssh/id_rsa.pub
-        chmod 644 ~/.ssh/id_rsa.pub
-        ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_HOST }} "echo SSH setup is complete"
-
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PUB }}" > ~/.ssh/id_rsa.pub
+          chmod 644 ~/.ssh/id_rsa.pub
+          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_HOST }} "echo SSH setup is complete"
           if: github.event_name == 'release'
-          for deb_file in $(ls ../*.deb); do
-          scp *.deb ${{ secrets.SSH_HOST }}:/home/action/"
+            for deb_file in $(ls ../*.deb); do
+            scp *.deb ${{ secrets.SSH_HOST }}:/home/action/" -p 39122
           done
