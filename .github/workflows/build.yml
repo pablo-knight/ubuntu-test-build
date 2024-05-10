@@ -85,17 +85,14 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-      - name: Upload packages to Nexus
+      - name: Transfer files
         env:
-          REPO_HOST: ${{ secrets.SSH_HOST }}
-          REPO_SSH: ${{ secrets.SSH_PUB }}
-        # Only upload if it is a release
+          REMOTE_USERNAME: ${{ secrets.REMOTE_USERNAME }}
+          REMOTE_PASSWORD: ${{ secrets.REMOTE_PASSWORD }}
+          REMOTE_HOST: ${{ secrets.REMOTE_HOST }}
         run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PUB }}" > ~/.ssh/id_rsa.pub
-          chmod 644 ~/.ssh/id_rsa.pub
-          ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_HOST }} "echo SSH setup is complete"
-          if: github.event_name == 'release'
-            for deb_file in $(ls ../*.deb); do
-            scp *.deb ${{ secrets.SSH_HOST }}:/home/action/" -p 39122
-          done
+          sshpass -p $REMOTE_PASSWORD scp /path/to/your/file.deb $REMOTE_USERNAME@hostname:/target/path/
+            if: github.event_name == 'release'
+              for deb_file in $(ls ../*.deb); do
+              sshpass -p $REMOTE_PASSWORD scp deb_file $REMOTE_USERNAME@$REMOTE_HOST:/home/action/ -p 39122
+            done
