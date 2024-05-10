@@ -31,7 +31,7 @@ jobs:
       - name: Build server packages
         run: |
           mv debian_server privacyidea/debian
-          cp deploy privacyidea/deploy
+          mv deploy privacyidea/deploy
           sed -i 's/{{CODENAME}}/jammy/g' privacyidea/debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
@@ -40,7 +40,7 @@ jobs:
       - name: Build radius packages
         run: |
           mv debian_radius privacyidea/debian
-          cp deploy privacyidea/deploy
+          mv deploy privacyidea/deploy
           sed -i 's/{{CODENAME}}/jammy/g' privacyidea/debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
