@@ -23,6 +23,7 @@ jobs:
         run: |
           mv debian_privacyidea debian
           sed -i 's/{{CODENAME}}/jammy/g' debian/changelog
+          cd privacyidea
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b --source-option=-Sa
           rm -r debian
@@ -61,6 +62,7 @@ jobs:
         run: |
           mv debian_privacyidea debian
           sed -i 's/{{CODENAME}}/focal/g' debian/changelog
+          cd privacyidea
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
