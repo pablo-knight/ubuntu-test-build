@@ -93,5 +93,5 @@ jobs:
         if: github.event_name == 'release'
         run: |
               for deb_file in $(ls ../*.deb); do
-              sshpass -p $REMOTE_PASSWORD scp deb_file $REMOTE_USERNAME@$REMOTE_HOST:/home/action/ -p 39122
+              sshpass -p "$REMOTE_PASSWORD" scp "@$deb_file" "$REMOTE_USERNAME@$REMOTE_HOST":/home/action/ -p 39122
             done
