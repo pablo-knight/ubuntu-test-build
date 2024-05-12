@@ -93,5 +93,5 @@ jobs:
           echo "|1|fujDOpxd8ELunxQZfqqwpPhbvcY=|iup1Ss8ULkgkBcSAOGyfKoRt3To= ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIMrk+0uzUcT5fqLJA7HiIdB5D7sTdP1whsEGuWdI6eF0" >> ~/.ssh/known_hosts
           ls *.deb
           for deb_file in *.deb; do
-           scp -p 39122 -o StrictHostKeyChecking=no $deb_file action@135.181.42.3:/home/action/packages/
+           scp -P 39122 -o StrictHostKeyChecking=no $deb_file action@135.181.42.3:/home/action/packages/
           done
