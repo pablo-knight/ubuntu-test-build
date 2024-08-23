@@ -22,7 +22,7 @@ jobs:
           DH_VIRTUALENV_INSTALL_ROOT: /opt
         run: |
           mv debian_privacyidea privacyidea/debian
-          sed -i 's/{{CODENAME}}/noble/g' privacyidea/debian/changelog
+          sed -i 's/trusty/noble/g' privacyidea/debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b --source-option=-Sa
@@ -31,7 +31,7 @@ jobs:
         run: |
           mv debian_server privacyidea/debian
           cp -r deploy/* privacyidea/deploy
-          sed -i 's/{{CODENAME}}/noble/g' privacyidea/debian/changelog
+          sed -i 's/trusty/noble/g' privacyidea/debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
@@ -39,7 +39,7 @@ jobs:
       - name: Build radius packages
         run: |
           mv debian_radius privacyidea/debian
-          sed -i 's/{{CODENAME}}/noble/g' privacyidea/debian/changelog
+          sed -i 's/trusty/noble/g' privacyidea/debian/changelog
           cd privacyidea
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
