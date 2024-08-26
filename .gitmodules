@@ -1,4 +1,0 @@
-[submodule "privacyidea"]
-	path = privacyidea
-	url = https://github.com/privacyidea/privacyidea.git
-	branch = master
