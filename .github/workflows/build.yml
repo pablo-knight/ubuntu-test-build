@@ -29,7 +29,7 @@ jobs:
       - name: Collect core package
         run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
       - name: Upload core built package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea
           path: package-privacyidea/*.deb
@@ -45,7 +45,7 @@ jobs:
       - name: Collect server packages
         run: mkdir -p packages-server && mv *.deb packages-server/
       - name: Upload server built packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea-server
           path: packages-server/*.deb
@@ -60,7 +60,7 @@ jobs:
       - name: Collect radius package
         run: mkdir -p package-radius && mv *.deb package-radius/
       - name: Upload radius built package
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea-radius
           path: package-radius/*.deb
@@ -90,7 +90,7 @@ jobs:
       - name: Collect core package
         run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
       - name: Upload core built packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea
           path: package-privacyidea/*.deb
@@ -106,7 +106,7 @@ jobs:
       - name: Collect server packages
         run: mkdir -p packages-server && mv *.deb packages-server/
       - name: Upload server built packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea-server
           path: packages-server/*.deb
@@ -121,7 +121,7 @@ jobs:
       - name: Collect radius package
         run: mkdir -p package-radius && mv *.deb package-radius/
       - name: Upload radius built packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea-radius
           path: package-radius/*.deb
@@ -152,7 +152,7 @@ jobs:
       - name: Collect core package
         run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
       - name: Upload core built packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea
           path: package-privacyidea/*.deb
@@ -168,7 +168,7 @@ jobs:
       - name: Collect server packages
         run: mkdir -p packages-server && mv *.deb packages-server/
       - name: Upload server built packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea-server
           path: packages-server/*.deb
@@ -183,7 +183,7 @@ jobs:
       - name: Collect radius package
         run: mkdir -p package-radius && mv *.deb package-radius/
       - name: Upload radius built packages
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: privacyidea-radius
           path: package-radius/*.deb
