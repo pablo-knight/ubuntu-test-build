@@ -26,6 +26,13 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b --source-option=-Sa
           rm -r debian
+      - name: Collect core package
+        run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
+      - name: Upload core built package
+        uses: actions/upload-artifact@v3
+        with:
+          name: privacyidea
+          path: package-privacyidea/*.deb
       - name: Build server packages
         run: |
           mv debian_server privacyidea/debian
@@ -35,6 +42,13 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
+      - name: Collect server packages
+        run: mkdir -p packages-server && mv *.deb packages-server/
+      - name: Upload server built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: privacyidea-server
+          path: packages-server/*.deb
       - name: Build radius packages
         run: |
           mv debian_radius privacyidea/debian
@@ -43,12 +57,133 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-      - name: List files for debugging
-        run: find . -type f -name "*.deb" -exec ls -lh {} \;
-      - name: Collect packages
-        run: mkdir -p packages && mv *.deb packages/
-      - name: Upload built packages
+      - name: Collect radius package
+        run: mkdir -p package-radius && mv *.deb package-radius/
+      - name: Upload radius built package
         uses: actions/upload-artifact@v3
         with:
-          name: built-packages
-          path: packages/*.deb
+          name: privacyidea-radius
+          path: package-radius/*.deb
+
+  build-jammy:
+    name: Ubuntu 22.04 LTS build
+    runs-on: ubuntu-22.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      - name: Install dependencies
+        run: |
+          sudo apt update
+          sudo apt install -y build-essential debhelper devscripts equivs dh-virtualenv
+      - name: Build core package
+        env:
+          DH_VIRTUALENV_INSTALL_ROOT: /opt
+        run: |
+          mv debian_privacyidea privacyidea/debian
+          sed -i "s/trusty/$(lsb_release -cs)/g" privacyidea/debian/changelog
+          cd privacyidea
+          sudo mk-build-deps -ri
+          dpkg-buildpackage -us -uc -b --source-option=-Sa
+          rm -r debian
+        - name: Collect core package
+        run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
+      - name: Upload core built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: privacyidea
+          path: package-privacyidea/*.deb
+      - name: Build server packages
+        run: |
+          mv debian_server privacyidea/debian
+          cp -r deploy/* privacyidea/deploy
+          sed -i "s/trusty/$(lsb_release -cs)/g" privacyidea/debian/changelog
+          cd privacyidea
+          sudo mk-build-deps -ri
+          dpkg-buildpackage -us -uc -b
+          rm -r debian
+      - name: Collect server packages
+        run: mkdir -p packages-server && mv *.deb packages-server/
+      - name: Upload server built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: privacyidea-server
+          path: packages-server/*.deb
+      - name: Build radius packages
+        run: |
+          mv debian_radius privacyidea/debian
+          sed -i "s/trusty/$(lsb_release -cs)/g" privacyidea/debian/changelog
+          cd privacyidea
+          sudo mk-build-deps -ri
+          dpkg-buildpackage -us -uc -b
+          rm -r debian
+      - name: Collect radius package
+        run: mkdir -p package-radius && mv *.deb package-radius/
+      - name: Upload radius built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: privacyidea-radius
+          path: package-radius/*.deb
+
+  build-focal:
+    name: Ubuntu 20.04 LTS build
+    runs-on: ubuntu-20.04
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          submodules: 'recursive'
+      - name: Install dependencies
+        run: |
+          sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
+          sudo apt update
+          sudo apt install -y build-essential debhelper devscripts equivs dh-virtualenv
+      - name: Build privacyID3A package
+        env:
+          DH_VIRTUALENV_INSTALL_ROOT: /opt
+        run: |
+          mv debian_privacyidea privacyidea/debian
+          sed -i "s/trusty/$(lsb_release -cs)/g" privacyidea/debian/changelog
+          cd privacyidea
+          sudo mk-build-deps -ri
+          dpkg-buildpackage -us -uc -b --source-option=-Sa
+          rm -r debian
+      - name: Collect core package
+        run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
+      - name: Upload core built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: privacyidea
+          path: package-privacyidea/*.deb
+      - name: Build server packages
+        run: |
+          mv debian_server privacyidea/debian
+          cp -r deploy/* privacyidea/deploy
+          sed -i "s/trusty/$(lsb_release -cs)/g" privacyidea/debian/changelog
+          cd privacyidea
+          sudo mk-build-deps -ri
+          dpkg-buildpackage -us -uc -b
+          rm -r debian
+      - name: Collect server packages
+        run: mkdir -p packages-server && mv *.deb packages-server/
+      - name: Upload server built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: privacyidea-server
+          path: packages-server/*.deb
+      - name: Build radius package
+        run: |
+          mv debian_radius privacyidea/debian
+          sed -i "s/trusty/$(lsb_release -cs)/g" privacyidea/debian/changelog
+          cd privacyidea
+          sudo mk-build-deps -ri
+          dpkg-buildpackage -us -uc -b
+          rm -r debian
+      - name: Collect radius package
+        run: mkdir -p package-radius && mv *.deb package-radius/
+      - name: Upload radius built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: privacyidea-radius
+          path: package-radius/*.deb
