@@ -5,7 +5,7 @@ on:
 
 jobs:
   build-noble:
-    name: Ubuntu 24.04 LTS build - Tag: ${{ github.event.client_payload.tag }}
+    name: Ubuntu 24.04 LTS build
     runs-on: ubuntu-24.04
     steps:
       - name: Checkout repository
@@ -16,7 +16,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y build-essential debhelper devscripts equivs dh-virtualenv
-      - name: Build core package
+      - name: Build privacyIDEA package
         env:
           DH_VIRTUALENV_INSTALL_ROOT: /opt
         run: |
@@ -26,13 +26,6 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b --source-option=-Sa
           rm -r debian
-      - name: Collect core package
-        run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
-      - name: Upload core built package
-        uses: actions/upload-artifact@v4
-        with:
-          name: privacyidea_noble
-          path: package-privacyidea/*.deb
       - name: Build server packages
         run: |
           mv debian_server privacyidea/debian
@@ -42,13 +35,13 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-      - name: Collect server packages
-        run: mkdir -p packages-server && mv *.deb packages-server/
+      - name: Collect core+server packages
+        run: mkdir -p packages-core-server && mv *.deb packages-core-server/
       - name: Upload server built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-server_noble
-          path: packages-server/*.deb
+          name: privacyidea-core-server_noble
+          path: packages-core-server/*.deb
       - name: Build radius packages
         run: |
           mv debian_radius privacyidea/debian
@@ -66,7 +59,7 @@ jobs:
           path: package-radius/*.deb
 
   build-jammy:
-    name: Ubuntu 22.04 LTS build - Tag: ${{ github.event.client_payload.tag }}
+    name: Ubuntu 22.04 LTS build
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
@@ -77,7 +70,7 @@ jobs:
         run: |
           sudo apt update
           sudo apt install -y build-essential debhelper devscripts equivs dh-virtualenv
-      - name: Build core package
+      - name: Build privacyIDEA package
         env:
           DH_VIRTUALENV_INSTALL_ROOT: /opt
         run: |
@@ -87,13 +80,6 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b --source-option=-Sa
           rm -r debian
-      - name: Collect core package
-        run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
-      - name: Upload core built packages
-        uses: actions/upload-artifact@v4
-        with:
-          name: privacyidea_jammy
-          path: package-privacyidea/*.deb
       - name: Build server packages
         run: |
           mv debian_server privacyidea/debian
@@ -103,13 +89,13 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-      - name: Collect server packages
-        run: mkdir -p packages-server && mv *.deb packages-server/
+      - name: Collect core+server packages
+        run: mkdir -p packages-core-server && mv *.deb packages-core-server/
       - name: Upload server built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-server_jammy
-          path: packages-server/*.deb
+          name: privacyidea-core-server_noble
+          path: packages-core-server/*.deb
       - name: Build radius packages
         run: |
           mv debian_radius privacyidea/debian
@@ -120,10 +106,10 @@ jobs:
           rm -r debian
       - name: Collect radius package
         run: mkdir -p package-radius && mv *.deb package-radius/
-      - name: Upload radius built packages
+      - name: Upload radius built package
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-radius_jammy
+          name: privacyidea-radius_noble
           path: package-radius/*.deb
 
   build-focal:
@@ -139,7 +125,7 @@ jobs:
           sudo add-apt-repository ppa:jyrki-pulliainen/dh-virtualenv
           sudo apt update
           sudo apt install -y build-essential debhelper devscripts equivs dh-virtualenv
-      - name: Build privacyID3A package
+      - name: Build privacyIDEA package
         env:
           DH_VIRTUALENV_INSTALL_ROOT: /opt
         run: |
@@ -149,13 +135,6 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b --source-option=-Sa
           rm -r debian
-      - name: Collect core package
-        run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
-      - name: Upload core built packages
-        uses: actions/upload-artifact@v4
-        with:
-          name: privacyidea_focal
-          path: package-privacyidea/*.deb
       - name: Build server packages
         run: |
           mv debian_server privacyidea/debian
@@ -165,14 +144,14 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-      - name: Collect server packages
-        run: mkdir -p packages-server && mv *.deb packages-server/
+      - name: Collect core+server packages
+        run: mkdir -p packages-core-server && mv *.deb packages-core-server/
       - name: Upload server built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-server_focal
-          path: packages-server/*.deb
-      - name: Build radius package
+          name: privacyidea-core-server_noble
+          path: packages-core-server/*.deb
+      - name: Build radius packages
         run: |
           mv debian_radius privacyidea/debian
           sed -i "s/trusty/$(lsb_release -cs)/g" privacyidea/debian/changelog
@@ -182,8 +161,8 @@ jobs:
           rm -r debian
       - name: Collect radius package
         run: mkdir -p package-radius && mv *.deb package-radius/
-      - name: Upload radius built packages
+      - name: Upload radius built package
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-radius_focal
+          name: privacyidea-radius_noble
           path: package-radius/*.deb
