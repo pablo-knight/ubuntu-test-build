@@ -1,4 +1,4 @@
-name: automatic ubuntu building by tagging master repository
+name: automatic package building by tagging privacyidea repository
 on:
   repository_dispatch:
     types: [tag-created]
