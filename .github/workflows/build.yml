@@ -87,7 +87,7 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b --source-option=-Sa
           rm -r debian
-        - name: Collect core package
+      - name: Collect core package
         run: mkdir -p package-privacyidea && mv *.deb package-privacyidea/
       - name: Upload core built packages
         uses: actions/upload-artifact@v3
