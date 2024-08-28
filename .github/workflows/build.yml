@@ -43,11 +43,8 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-          ls -l *
-          pwd
-          cd .. 
-          pwd          
-          ls -l *
+      - name: List files for debugging
+        run: find . -type f -name "*.deb" -exec ls -lh {} \;
       - name: Collect packages
         run: mkdir -p packages && mv ../*.deb packages/
       - name: Upload built packages
