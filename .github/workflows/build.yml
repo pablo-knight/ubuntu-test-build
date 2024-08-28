@@ -1,8 +1,7 @@
-name: Ubuntu
+name: automatic ubuntu building by tagging master repository
 on:
-  push:
-  release:
-    types: [released]
+  repository_dispatch:
+    types: [tag-created]
 
 jobs:
   build-noble:
