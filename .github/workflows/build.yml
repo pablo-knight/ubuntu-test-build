@@ -43,8 +43,8 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
-          ll ../*
-          ll *
+          ls -l ../*
+          ls -l *
       - name: Collect packages
         run: mkdir -p packages && mv ../*.deb packages/
       - name: Upload built packages
