@@ -31,7 +31,7 @@ jobs:
       - name: Upload core built package
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea
+          name: privacyidea_noble
           path: package-privacyidea/*.deb
       - name: Build server packages
         run: |
@@ -47,7 +47,7 @@ jobs:
       - name: Upload server built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-server
+          name: privacyidea-server_noble
           path: packages-server/*.deb
       - name: Build radius packages
         run: |
@@ -62,7 +62,7 @@ jobs:
       - name: Upload radius built package
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-radius
+          name: privacyidea-radius_noble
           path: package-radius/*.deb
 
   build-jammy:
@@ -92,7 +92,7 @@ jobs:
       - name: Upload core built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea
+          name: privacyidea_jammy
           path: package-privacyidea/*.deb
       - name: Build server packages
         run: |
@@ -108,7 +108,7 @@ jobs:
       - name: Upload server built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-server
+          name: privacyidea-server_jammy
           path: packages-server/*.deb
       - name: Build radius packages
         run: |
@@ -123,7 +123,7 @@ jobs:
       - name: Upload radius built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-radius
+          name: privacyidea-radius_jammy
           path: package-radius/*.deb
 
   build-focal:
@@ -154,7 +154,7 @@ jobs:
       - name: Upload core built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea
+          name: privacyidea_focal
           path: package-privacyidea/*.deb
       - name: Build server packages
         run: |
@@ -170,7 +170,7 @@ jobs:
       - name: Upload server built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-server
+          name: privacyidea-server_focal
           path: packages-server/*.deb
       - name: Build radius package
         run: |
@@ -185,5 +185,5 @@ jobs:
       - name: Upload radius built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-radius
+          name: privacyidea-radius_focal
           path: package-radius/*.deb
