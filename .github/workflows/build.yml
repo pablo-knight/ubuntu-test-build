@@ -44,6 +44,15 @@ jobs:
           dpkg-buildpackage -us -uc -b
           rm -r debian
 
+      - name: Collect packages
+        run: mkdir -p packages && mv ../*.deb packages/
+        
+      - name: Upload built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-packages
+          path: packages/*.deb
+
   build-jammy:
     name: Ubuntu 22.04 LTS build
     runs-on: ubuntu-22.04
@@ -83,6 +92,15 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
+
+      - name: Collect packages
+        run: mkdir -p packages && mv ../*.deb packages/
+        
+      - name: Upload built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-packages
+          path: packages/*.deb
 
   build-focal:
     name: Ubuntu 20.04 LTS build
@@ -124,3 +142,12 @@ jobs:
           sudo mk-build-deps -ri
           dpkg-buildpackage -us -uc -b
           rm -r debian
+
+      - name: Collect packages
+        run: mkdir -p packages && mv ../*.deb packages/
+
+      - name: Upload built packages
+        uses: actions/upload-artifact@v3
+        with:
+          name: built-packages
+          path: packages/*.deb
