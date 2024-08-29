@@ -8,6 +8,8 @@ jobs:
     name: Ubuntu 24.04 LTS build
     runs-on: ubuntu-24.04
     steps:
+      - name: Set workflow run name
+        run: echo "TAG_NAME=${{ github.event.client_payload.tag }}" >> $GITHUB_ENV
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
