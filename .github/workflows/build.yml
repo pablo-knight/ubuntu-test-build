@@ -8,7 +8,7 @@ env:
 
 jobs:
   build-noble:
-    name: Ubuntu 24.04 LTS build
+    name: Ubuntu 24.04 LTS build (Tag: ${{ env.TAG_NAME }})
     runs-on: ubuntu-24.04
     steps:
       - name: Set workflow run name
@@ -46,8 +46,8 @@ jobs:
       - name: Upload server built packages
         uses: actions/upload-artifact@v4
         with:
-          name: privacyidea-core-server_noble
-          path: packages-core-server/*.deb
+          name: privacyidea-core-server_noble_${{ env.TAG_NAME }}
+          path: packages-core-server/**/*
       - name: Build radius packages
         run: |
           mv debian_radius privacyidea/debian
