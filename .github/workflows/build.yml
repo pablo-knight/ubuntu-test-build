@@ -12,8 +12,7 @@ jobs:
     runs-on: ubuntu-24.04
     steps:
       - name: Set workflow run name
-        run: |
-          echo "Running build for tag: $TAG_NAME"
+        run: echo "Running build for tag: $TAG_NAME"
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
@@ -63,7 +62,6 @@ jobs:
         with:
           name: privacyidea-radius_noble
           path: package-radius/*.deb
-  name: Build ${{ env.TAG_NAME }}
 
   build-jammy:
     name: Ubuntu 22.04 LTS build
