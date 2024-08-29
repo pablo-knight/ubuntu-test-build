@@ -43,7 +43,7 @@ jobs:
           rm -r debian
       - name: Collect core+server packages
         run: mkdir -p packages-core-server && mv *.deb packages-core-server/
-      - name: Upload server built packages
+      - name: Upload core+server built packages
         uses: actions/upload-artifact@v4
         with:
           name: privacyidea-core-server_noble
