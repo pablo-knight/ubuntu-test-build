@@ -59,6 +59,7 @@ jobs:
         with:
           name: privacyidea-radius_noble
           path: package-radius/*.deb
+  name: Build ${{ env.TAG_NAME }}
 
   build-jammy:
     name: Ubuntu 22.04 LTS build
