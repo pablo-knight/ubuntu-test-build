@@ -1,3 +1,27 @@
+privacyidea-server (3.11~dev3-1trusty) trusty; urgency=medium
+
+  * update version number
+
+ -- NetKnights GmbH <release@netknights.it>  Wed, 19 Feb 2025 12:30:00 +0200
+
+privacyidea-server (3.10.2-1trusty) trusty; urgency=medium
+
+  * update version number
+
+ -- NetKnights GmbH <release@netknights.it>  Tue, 17 Dec 2024 12:30:00 +0200
+
+privacyidea-server (3.10.1-1trusty) trusty; urgency=medium
+
+  * update version number
+
+ -- NetKnights GmbH <release@netknights.it>  Mon, 14 Oct 2024 12:30:00 +0200
+
+privacyidea-server (3.10-1trusty) trusty; urgency=medium
+
+  * update version number
+
+ -- NetKnights GmbH <release@netknights.it>  Tue, 03 Sep 2024 12:30:00 +0200
+
 privacyidea-server (3.10~dev5-1trusty) trusty; urgency=medium
 
   * update version number
